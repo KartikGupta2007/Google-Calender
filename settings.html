@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Calendar</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body class="settings-page">
+
+  <!-- Sticky Header -->
+  <header class="settings-header">
+    <div class="settings-header-left">
+      <button class="icon-btn" id="backBtn" aria-label="Go back">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/>
+        </svg>
+      </button>
+      <h1 class="settings-title">Settings</h1>
+    </div>
+    <div class="settings-header-right">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" width="20" height="20" class="search-icon">
+          <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="currentColor"/>
+        </svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search settings" aria-label="Search settings">
+      </div>
+      <button class="icon-btn" id="helpBtn" aria-label="Help">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z" fill="currentColor"/>
+        </svg>
+      </button>
+      <button class="icon-btn" id="closeBtn" aria-label="Close settings">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Two-pane body -->
+  <div class="settings-body">
+
+    <!-- Left Sidebar Navigation -->
+    <nav class="settings-nav" aria-label="Settings navigation">
+      <div class="nav-list">
+        <div class="nav-section">
+          <button class="nav-item active" data-target="general-lang">
+            Language & region
+          </button>
+          <button class="nav-item" data-target="general-timezone">
+            Time zone
+          </button>
+          <button class="nav-item" data-target="general-worldclock">
+            World clock
+          </button>
+          <button class="nav-item" data-target="general-events">
+            Event settings
+          </button>
+          <button class="nav-item" data-target="general-notifications">
+            Notifications
+          </button>
+          <button class="nav-item" data-target="general-view">
+            View options
+          </button>
+          <button class="nav-item" data-target="general-working">
+            Working hours & location
+          </button>
+          <button class="nav-item" data-target="general-shortcuts">
+            Keyboard shortcuts
+          </button>
+          <button class="nav-item" data-target="general-a11y">
+            Accessibility
+          </button>
+        </div>
+
+        <div class="nav-section">
+          <h2 class="nav-section-title">Settings for my calendars</h2>
+          <div id="calendarList">
+            <!-- Dynamic calendar items will be inserted here -->
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <button class="nav-item" data-target="import-export">
+            Import & export
+          </button>
+          <button class="nav-item" data-target="trash">
+            Trash
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Right Content Panel -->
+    <main class="settings-content" id="settingsContent">
+
+      <!-- Language & Region Section -->
+      <section id="general-lang" class="settings-section">
+        <h2 class="section-title">Language & region</h2>
+        <p class="section-description">Customize how Calendar displays dates and times</p>
+
+        <div class="setting-group">
+          <label class="setting-label" for="language">Language</label>
+          <select id="language" class="select-input">
+            <option value="en">English (United States)</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="hi">हिन्दी</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <label class="setting-label" for="region">Country/Region</label>
+          <select id="region" class="select-input">
+            <option value="us">United States</option>
+            <option value="gb">United Kingdom</option>
+            <option value="in">India</option>
+            <option value="ca">Canada</option>
+            <option value="au">Australia</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <fieldset class="radio-group">
+            <legend class="setting-label">Date format</legend>
+            <label class="radio-label">
+              <input type="radio" name="dateFormat" value="DMY" checked>
+              <span class="radio-text">Day/Month/Year (e.g., 02/11/2025)</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="dateFormat" value="MDY">
+              <span class="radio-text">Month/Day/Year (e.g., 11/02/2025)</span>
+            </label>
+          </fieldset>
+        </div>
+
+        <div class="setting-group">
+          <fieldset class="radio-group">
+            <legend class="setting-label">Time format</legend>
+            <label class="radio-label">
+              <input type="radio" name="timeFormat" value="12" checked>
+              <span class="radio-text">12-hour (3:00 PM)</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="timeFormat" value="24">
+              <span class="radio-text">24-hour (15:00)</span>
+            </label>
+          </fieldset>
+        </div>
+      </section>
+
+      <!-- Time Zone Section -->
+      <section id="general-timezone" class="settings-section">
+        <h2 class="section-title">Time zone</h2>
+        <p class="section-description">Set your primary and secondary time zones</p>
+
+        <div class="setting-group">
+          <label class="setting-label" for="primaryTz">Primary time zone</label>
+          <select id="primaryTz" class="select-input">
+            <option value="America/New_York">Eastern Time - New York</option>
+            <option value="America/Chicago">Central Time - Chicago</option>
+            <option value="America/Los_Angeles">Pacific Time - Los Angeles</option>
+            <option value="Asia/Kolkata" selected>India Standard Time - Kolkata</option>
+            <option value="Europe/London">London</option>
+            <option value="Asia/Tokyo">Tokyo</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <label class="toggle-label">
+            <input type="checkbox" id="secondaryTzEnabled" class="toggle-input">
+            <span class="toggle-switch"></span>
+            <span class="toggle-text">Display secondary time zone</span>
+          </label>
+        </div>
+
+        <div class="setting-group hidden" id="secondaryTzGroup">
+          <label class="setting-label" for="secondaryTz">Secondary time zone</label>
+          <select id="secondaryTz" class="select-input">
+            <option value="">Select time zone</option>
+            <option value="America/New_York">Eastern Time - New York</option>
+            <option value="America/Chicago">Central Time - Chicago</option>
+            <option value="America/Los_Angeles">Pacific Time - Los Angeles</option>
+            <option value="Asia/Kolkata">India Standard Time - Kolkata</option>
+            <option value="Europe/London">London</option>
+            <option value="Asia/Tokyo">Tokyo</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <label class="toggle-label">
+            <input type="checkbox" id="askUpdateTz" class="toggle-input" checked>
+            <span class="toggle-switch"></span>
+            <span class="toggle-text">Ask to update my primary time zone to current location</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- World Clock Section -->
+      <section id="general-worldclock" class="settings-section">
+        <h2 class="section-title">World clock</h2>
+        <p class="section-description">Show time zones for different locations</p>
+
+        <div class="setting-group">
+          <label class="toggle-label">
+            <input type="checkbox" id="worldClockEnabled" class="toggle-input">
+            <span class="toggle-switch"></span>
+            <span class="toggle-text">Show world clock</span>
+          </label>
+        </div>
+
+        <div class="setting-group hidden" id="worldClockList">
+          <div class="repeatable-list" id="worldClockRows">
+            <!-- World clock rows will be added here -->
+          </div>
+          <button class="btn-secondary" id="addWorldClock">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor"/>
+            </svg>
+            Add time zone
+          </button>
+        </div>
+      </section>
+
+      <!-- Event Settings Section -->
+      <section id="general-events" class="settings-section">
+        <h2 class="section-title">Event settings</h2>
+        <p class="section-description">Default settings for new events</p>
+
+        <div class="setting-group">
+          <label class="setting-label" for="defaultDuration">Default duration</label>
+          <select id="defaultDuration" class="select-input">
+            <option value="15">15 minutes</option>
+            <option value="30" selected>30 minutes</option>
+            <option value="60">1 hour</option>
+            <option value="90">1.5 hours</option>
+            <option value="120">2 hours</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <label class="setting-label" for="defaultVisibility">Default visibility</label>
+          <select id="defaultVisibility" class="select-input">
+            <option value="default" selected>Default</option>
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <label class="setting-label" for="autoAddInvites">Automatically add invitations</label>
+          <select id="autoAddInvites" class="select-input">
+            <option value="all">Add all invitations to my calendar</option>
+            <option value="when-respond" selected>Only when I respond to the invitation</option>
+            <option value="never">Don't automatically add invitations</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <label class="toggle-label">
+            <input type="checkbox" id="addUnknownInvitees" class="toggle-input">
+            <span class="toggle-switch"></span>
+            <span class="toggle-text">Add invitations that don't specify the recipient</span>
+          </label>
+        </div>
+
+        <div class="setting-group">
+          <fieldset class="checkbox-group">
+            <legend class="setting-label">Default guest permissions</legend>
+            <label class="checkbox-label">
+              <input type="checkbox" id="guestModify" class="checkbox-input">
+              <span class="checkmark"></span>
+              <span class="checkbox-text">Modify event</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="guestInvite" class="checkbox-input" checked>
+              <span class="checkmark"></span>
+              <span class="checkbox-text">Invite others</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="guestSeeList" class="checkbox-input" checked>
+              <span class="checkmark"></span>
+              <span class="checkbox-text">See guest list</span>
+            </label>
+          </fieldset>
+        </div>
+      </section>
+
+      <!-- Notifications Section -->
+      <section id="general-notifications" class="settings-section">
+        <h2 class="section-title">Notifications</h2>
+        <p class="section-description">Set default notifications for events</p>
+
+        <div class="setting-group">
+          <h3 class="subsection-title">Timed events</h3>
+          <div class="repeatable-list" id="timedNotifications">
+            <!-- Timed notification rows will be added here -->
+          </div>
+          <button class="btn-secondary" id="addTimedNotification">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor"/>
+            </svg>
+            Add notification
+          </button>
+        </div>
+
+        <div class="setting-group">
+          <h3 class="subsection-title">All-day events</h3>
+          <div class="repeatable-list" id="allDayNotifications">
+            <!-- All-day notification rows will be added here -->
+          </div>
+          <button class="btn-secondary" id="addAllDayNotification">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor"/>
+            </svg>
+            Add notification
+          </button>
+        </div>
+      </section>
+
+      <!-- View Options Section -->
+      <section id="general-view" class="settings-section">
+        <h2 class="section-title">View options</h2>
+        <p class="section-description">Customize how your calendar looks</p>
+
+        <div class="setting-group">
+          <label class="toggle-label">
+            <input type="checkbox" id="showWeekends" class="toggle-input" checked>
+            <span class="toggle-switch"></span>
+            <span class="toggle-text">Show weekends</span>
+          </label>
+        </div>
+
+        <div class="setting-group">
+          <label class="toggle-label">
+            <input type="checkbox" id="reducePast" class="toggle-input" checked>
+            <span class="toggle-switch"></span>
+            <span class="toggle-text">Reduce brightness of past events</span>
+          </label>
+        </div>
+
+        <div class="setting-group">
+          <label class="toggle-label">
+            <input type="checkbox" id="showDeclined" class="toggle-input">
+            <span class="toggle-switch"></span>
+            <span class="toggle-text">Show declined events</span>
+          </label>
+        </div>
+
+        <div class="setting-group">
+          <label class="toggle-label">
+            <input type="checkbox" id="alternateCalendarEnabled" class="toggle-input">
+            <span class="toggle-switch"></span>
+            <span class="toggle-text">Show alternate calendar</span>
+          </label>
+        </div>
+
+        <div class="setting-group hidden" id="alternateCalendarGroup">
+          <label class="setting-label" for="alternateCalendar">Alternate calendar</label>
+          <select id="alternateCalendar" class="select-input">
+            <option value="">None</option>
+            <option value="indian">Indian (Saka)</option>
+            <option value="islamic">Islamic (Hijri)</option>
+            <option value="chinese">Chinese</option>
+            <option value="hebrew">Hebrew</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <label class="setting-label" for="weekStartsOn">Week starts on</label>
+          <select id="weekStartsOn" class="select-input">
+            <option value="sun" selected>Sunday</option>
+            <option value="mon">Monday</option>
+            <option value="sat">Saturday</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <label class="setting-label" for="defaultView">Default view</label>
+          <select id="defaultView" class="select-input">
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month" selected>Month</option>
+            <option value="year">Year</option>
+            <option value="schedule">Schedule</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Working Hours & Location Section -->
+      <section id="general-working" class="settings-section">
+        <h2 class="section-title">Working hours & location</h2>
+        <p class="section-description">Set your typical working schedule</p>
+
+        <div class="setting-group">
+          <label class="toggle-label">
+            <input type="checkbox" id="workingHoursEnabled" class="toggle-input">
+            <span class="toggle-switch"></span>
+            <span class="toggle-text">Enable working hours</span>
+          </label>
+        </div>
+
+        <div class="setting-group hidden" id="workingHoursGrid">
+          <div class="working-hours-list">
+            <div class="working-hours-row" data-day="sun">
+              <label class="day-checkbox">
+                <input type="checkbox" class="checkbox-input">
+                <span class="checkmark"></span>
+                <span class="day-name">Sunday</span>
+              </label>
+              <select class="time-select" disabled>
+                <option value="09:00">9:00 AM</option>
+                <option value="10:00">10:00 AM</option>
+              </select>
+              <span class="time-separator">to</span>
+              <select class="time-select" disabled>
+                <option value="17:00" selected>5:00 PM</option>
+                <option value="18:00">6:00 PM</option>
+              </select>
+            </div>
+            <!-- Repeat for other days -->
+            <div class="working-hours-row" data-day="mon">
+              <label class="day-checkbox">
+                <input type="checkbox" class="checkbox-input" checked>
+                <span class="checkmark"></span>
+                <span class="day-name">Monday</span>
+              </label>
+              <select class="time-select">
+                <option value="09:00" selected>9:00 AM</option>
+              </select>
+              <span class="time-separator">to</span>
+              <select class="time-select">
+                <option value="17:00" selected>5:00 PM</option>
+              </select>
+            </div>
+            <div class="working-hours-row" data-day="tue">
+              <label class="day-checkbox">
+                <input type="checkbox" class="checkbox-input" checked>
+                <span class="checkmark"></span>
+                <span class="day-name">Tuesday</span>
+              </label>
+              <select class="time-select">
+                <option value="09:00" selected>9:00 AM</option>
+              </select>
+              <span class="time-separator">to</span>
+              <select class="time-select">
+                <option value="17:00" selected>5:00 PM</option>
+              </select>
+            </div>
+            <div class="working-hours-row" data-day="wed">
+              <label class="day-checkbox">
+                <input type="checkbox" class="checkbox-input" checked>
+                <span class="checkmark"></span>
+                <span class="day-name">Wednesday</span>
+              </label>
+              <select class="time-select">
+                <option value="09:00" selected>9:00 AM</option>
+              </select>
+              <span class="time-separator">to</span>
+              <select class="time-select">
+                <option value="17:00" selected>5:00 PM</option>
+              </select>
+            </div>
+            <div class="working-hours-row" data-day="thu">
+              <label class="day-checkbox">
+                <input type="checkbox" class="checkbox-input" checked>
+                <span class="checkmark"></span>
+                <span class="day-name">Thursday</span>
+              </label>
+              <select class="time-select">
+                <option value="09:00" selected>9:00 AM</option>
+              </select>
+              <span class="time-separator">to</span>
+              <select class="time-select">
+                <option value="17:00" selected>5:00 PM</option>
+              </select>
+            </div>
+            <div class="working-hours-row" data-day="fri">
+              <label class="day-checkbox">
+                <input type="checkbox" class="checkbox-input" checked>
+                <span class="checkmark"></span>
+                <span class="day-name">Friday</span>
+              </label>
+              <select class="time-select">
+                <option value="09:00" selected>9:00 AM</option>
+              </select>
+              <span class="time-separator">to</span>
+              <select class="time-select">
+                <option value="17:00" selected>5:00 PM</option>
+              </select>
+            </div>
+            <div class="working-hours-row" data-day="sat">
+              <label class="day-checkbox">
+                <input type="checkbox" class="checkbox-input">
+                <span class="checkmark"></span>
+                <span class="day-name">Saturday</span>
+              </label>
+              <select class="time-select" disabled>
+                <option value="09:00">9:00 AM</option>
+              </select>
+              <span class="time-separator">to</span>
+              <select class="time-select" disabled>
+                <option value="17:00" selected>5:00 PM</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <label class="setting-label" for="workingLocation">Working location</label>
+          <select id="workingLocation" class="select-input">
+            <option value="unspecified" selected>Unspecified</option>
+            <option value="office">Office</option>
+            <option value="home">Home</option>
+          </select>
+        </div>
+
+        <div class="setting-group hidden" id="officeLocationGroup">
+          <label class="setting-label" for="workingOffice">Office location</label>
+          <input type="text" id="workingOffice" class="text-input" placeholder="Enter office location">
+        </div>
+      </section>
+
+      <!-- Keyboard Shortcuts Section -->
+      <section id="general-shortcuts" class="settings-section">
+        <h2 class="section-title">Keyboard shortcuts</h2>
+        <p class="section-description">Use keyboard shortcuts to navigate Calendar faster</p>
+
+        <div class="setting-group">
+          <label class="toggle-label">
+            <input type="checkbox" id="shortcutsEnabled" class="toggle-input" checked>
+            <span class="toggle-switch"></span>
+            <span class="toggle-text">Enable keyboard shortcuts</span>
+          </label>
+        </div>
+
+        <div class="setting-group">
+          <button class="btn-secondary" id="viewShortcuts">View keyboard shortcuts</button>
+        </div>
+      </section>
+
+      <!-- Accessibility Section -->
+      <section id="general-a11y" class="settings-section">
+        <h2 class="section-title">Accessibility</h2>
+        <p class="section-description">Make Calendar easier to use with assistive technologies</p>
+
+        <div class="setting-group">
+          <label class="toggle-label">
+            <input type="checkbox" id="a11yScreenReaderNotifs" class="toggle-input">
+            <span class="toggle-switch"></span>
+            <span class="toggle-text">Enable screen reader notifications</span>
+          </label>
+        </div>
+
+        <div class="setting-group">
+          <label class="toggle-label">
+            <input type="checkbox" id="a11yListView" class="toggle-input">
+            <span class="toggle-switch"></span>
+            <span class="toggle-text">Use list view for screen readers</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Import & Export Section -->
+      <section id="import-export" class="settings-section">
+        <h2 class="section-title">Import & export</h2>
+        <p class="section-description">Import events from other calendars or export your calendar data</p>
+
+        <div class="setting-group">
+          <h3 class="subsection-title">Import</h3>
+          <label class="setting-label" for="importFile">Select file to import (.ics)</label>
+          <input type="file" id="importFile" accept=".ics" class="file-input">
+
+          <label class="setting-label" for="importTarget">Import to calendar</label>
+          <select id="importTarget" class="select-input">
+            <!-- Dynamic calendar list -->
+          </select>
+
+          <button class="btn-primary" id="importBtn">Import</button>
+        </div>
+
+        <div class="setting-group">
+          <h3 class="subsection-title">Export</h3>
+          <p class="helper-text">Export all your calendar events to a .ics file</p>
+          <button class="btn-secondary" id="exportBtn">Export all calendars</button>
+        </div>
+      </section>
+
+      <!-- Trash Section -->
+      <section id="trash" class="settings-section">
+        <h2 class="section-title">Trash</h2>
+        <p class="section-description">View and manage deleted events</p>
+
+        <div class="setting-group">
+          <label class="setting-label" for="trashFilter">Show events from</label>
+          <select id="trashFilter" class="select-input">
+            <option value="30" selected>Last 30 days</option>
+            <option value="60">Last 60 days</option>
+            <option value="90">Last 90 days</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <div class="trash-list" id="trashList">
+            <!-- Trash items will be added here -->
+            <p class="empty-state">No items in trash</p>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <button class="btn-destructive" id="emptyTrashBtn">Empty trash</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Modals -->
+  <div id="shortcutsModal" class="modal hidden" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+    <div class="modal-backdrop" aria-hidden="true"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle" class="modal-title">Keyboard shortcuts</h2>
+        <button class="icon-btn" id="closeModal" aria-label="Close">
+          <svg viewBox="0 0 24 24" width="24" height="24">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="shortcuts-grid">
+          <div class="shortcut-row">
+            <span class="shortcut-key">k</span>
+            <span class="shortcut-desc">Next view</span>
+          </div>
+          <div class="shortcut-row">
+            <span class="shortcut-key">j</span>
+            <span class="shortcut-desc">Previous view</span>
+          </div>
+          <div class="shortcut-row">
+            <span class="shortcut-key">t</span>
+            <span class="shortcut-desc">Today</span>
+          </div>
+          <div class="shortcut-row">
+            <span class="shortcut-key">c</span>
+            <span class="shortcut-desc">Create event</span>
+          </div>
+          <div class="shortcut-row">
+            <span class="shortcut-key">d</span>
+            <span class="shortcut-desc">Day view</span>
+          </div>
+          <div class="shortcut-row">
+            <span class="shortcut-key">w</span>
+            <span class="shortcut-desc">Week view</span>
+          </div>
+          <div class="shortcut-row">
+            <span class="shortcut-key">m</span>
+            <span class="shortcut-desc">Month view</span>
+          </div>
+          <div class="shortcut-row">
+            <span class="shortcut-key">y</span>
+            <span class="shortcut-desc">Year view</span>
+          </div>
+          <div class="shortcut-row">
+            <span class="shortcut-key">/</span>
+            <span class="shortcut-desc">Search</span>
+          </div>
+          <div class="shortcut-row">
+            <span class="shortcut-key">s</span>
+            <span class="shortcut-desc">Settings</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="settings.js"></script>
+</body>
+</html>
