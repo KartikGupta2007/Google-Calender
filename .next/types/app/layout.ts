@@ -1,4 +1,4 @@
-// File: /Users/kartikgupta/Downloads/Google-Calender/app/layout.tsx
+// File: /Users/kartikgupta/Desktop/Self/Self Made Projects/Google-Calender/app/layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
