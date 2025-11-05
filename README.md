@@ -5,7 +5,10 @@
   
   A production-ready Google Calendar clone built with modern web technologies.
   
-  [View Live Demo](https://google-calendar-clone-main-demo.vercel.app)
+  ### 🎥 Demo Video
+  
+  https://github.com/user-attachments/assets/Demo.mp4
+  
 </div>
 
 ## 📖 Table of Contents
