@@ -1,0 +1,81 @@
+# ============================================
+# Docker Compose for Google Calendar Clone
+# Complete stack with PostgreSQL database
+# ============================================
+
+services:
+  # PostgreSQL Database (Local development option)
+  # Comment this service if using cloud database (Neon, Supabase, etc.)
+  postgres:
+    image: postgres:15-alpine
+    container_name: google-calendar-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: calendar_db
+      POSTGRES_USER: calendar_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-calendar_secure_password_123}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    networks:
+      - calendar-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U calendar_user -d calendar_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    profiles:
+      - local-db  # Use 'docker-compose --profile local-db up' to enable local database
+
+  # Google Calendar Application
+  calendar-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - DATABASE_URL=${DATABASE_URL}
+        - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+        - NEXTAUTH_URL=${NEXTAUTH_URL:-http://localhost:3000}
+        - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+        - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+        - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+        - NEXT_PUBLIC_API_BASE=${NEXT_PUBLIC_API_BASE:-http://localhost:3000}
+    container_name: google-calendar-app
+    restart: unless-stopped
+    env_file:
+      - .env.local
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      # Use DATABASE_URL from .env.local (default: Neon)
+      # Override only if using local postgres: uncomment and use --profile local-db
+      # - DATABASE_URL=postgresql://calendar_user:${POSTGRES_PASSWORD:-calendar_secure_password_123}@postgres:5432/calendar_db?sslmode=disable
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    # Only depend on postgres if using local database
+    # depends_on:
+    #   postgres:
+    #     condition: service_healthy
+    networks:
+      - calendar-network
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) }).on('error', () => process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+# Volumes for data persistence
+volumes:
+  postgres_data:
+    driver: local
+    name: google_calendar_postgres_data
+
+# Network for service communication
+networks:
+  calendar-network:
+    driver: bridge
+    name: google_calendar_network

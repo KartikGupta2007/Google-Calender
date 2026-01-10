@@ -1,0 +1,331 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Material Design 3 - Base Styles */
+    --companion-shell-width: 300px;
+    transition: opacity ease-in 0.2s;
+    font-family: "Google Sans Text", "Google Sans", Helvetica, Arial, sans-serif;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    text-rendering: geometricPrecision;
+    overflow: hidden;
+    height: 100%;
+
+    /* GM3 Autocomplete Component Tokens */
+    --gm3-autocomplete-filled-menu-list-item-label-text-font: Google Sans Text, Google Sans;
+    --gm3-autocomplete-filled-text-field-container-color: var(--gm3-sys-color-surface-container-high);
+    --gm3-autocomplete-filled-text-field-input-text-font: Google Sans Text, Google Sans;
+    --gm3-autocomplete-filled-text-field-input-text-size: 0.875rem;
+    --gm3-autocomplete-filled-text-field-leading-icon-size: 20px;
+    --gm3-autocomplete-filled-text-field-trailing-icon-size: 20px;
+    --gm3-autocomplete-filled-text-field-active-indicator-color: transparent;
+    --gm3-autocomplete-filled-text-field-disabled-active-indicator-color: transparent;
+    --gm3-autocomplete-filled-text-field-hover-active-indicator-color: transparent;
+    --gm3-autocomplete-filled-text-field-label-text-font: Google Sans Text, Google Sans;
+    --gm3-autocomplete-filled-text-field-supporting-text-font: Google Sans Text, Google Sans;
+    --gm3-autocomplete-outlined-menu-list-item-label-text-font: Google Sans Text, Google Sans;
+    --gm3-autocomplete-outlined-text-field-input-text-font: Google Sans Text, Google Sans;
+    --gm3-autocomplete-outlined-text-field-input-text-size: 0.875rem;
+    --gm3-autocomplete-outlined-text-field-leading-icon-size: 20px;
+    --gm3-autocomplete-outlined-text-field-trailing-icon-size: 20px;
+
+    /* GM3 Checkbox Component Tokens */
+    --gm3-checkbox-touch-target-size: 40px;
+    --gm3-checkbox-label-text-size: 0.875rem;
+
+    /* GM3 Dialog Component Tokens */
+    --gm3-dialog-z-index: 5006;
+
+    /* GM3 Icon Button Component Tokens */
+    --gm3-icon-button-standard-icon-size: 20px;
+
+    /* GM3 List Component Tokens */
+    --gm3-list-list-item-one-line-container-height: 40px;
+    --gm3-list-list-item-label-text-font: Google Sans Text, Google Sans;
+    --gm3-list-list-item-label-text-size: 0.875rem;
+    --gm3-list-list-item-label-text-weight: 400;
+    --gm3-list-list-item-selected-container-color: var(--gm3-sys-color-secondary-container);
+    --gm3-list-list-item-supporting-text-font: Google Sans Text, Google Sans;
+    --gm3-list-list-item-trailing-supporting-text-font: Google Sans Text, Google Sans;
+
+    /* GM3 Menu Component Tokens */
+    --gm3-menu-list-item-container-height: 40px;
+    --gm3-menu-list-item-label-text-font: Google Sans Text, Google Sans;
+    --gm3-menu-list-item-label-text-size: 0.875rem;
+    --gm3-menu-list-item-label-text-weight: 400;
+    --gm3-menu-list-item-with-leading-icon-leading-icon-size: 20px;
+    --gm3-menu-menu-title-label-text-font: Google Sans Text, Google Sans;
+    --gm3-menu-list-item-selected-container-color: var(--gm3-sys-color-secondary-container);
+    --gm3-menu-list-item-supporting-text-font: Google Sans Text, Google Sans;
+    --gm3-menu-list-item-trailing-supporting-text-font: Google Sans Text, Google Sans;
+    --gm3-menu-surface-container-color: var(--gm3-sys-color-surface-container);
+
+    /* GM3 Radio Component Tokens */
+    --gm3-radio-state-layer-size: 32px;
+
+    /* GM3 Select Component Tokens */
+    --gm3-select-shared-menu-list-item-label-text-size: 0.875rem;
+    --gm3-select-shared-text-field-input-text-size: 0.875rem;
+    --gm3-select-shared-text-field-container-height: 52px;
+    --gm3-select-shared-menu-container-color: var(--gm3-sys-color-surface-container);
+    --gm3-select-shared-menu-list-item-one-line-container-height: 40px;
+    --gm3-select-filled-text-field-container-color: var(--gm3-sys-color-surface-container-high);
+    --gm3-select-filled-text-field-active-indicator-color: transparent;
+    --gm3-select-filled-text-field-disabled-active-indicator-color: transparent;
+    --gm3-select-filled-text-field-hover-active-indicator-color: transparent;
+    --gm3-select-filled-text-field-container-shape: 4px;
+
+    /* GM3 Text Field Component Tokens */
+    --gm3-text-field-filled-container-color: var(--gm3-sys-color-surface-container-high);
+    --gm3-text-field-filled-input-text-size: 0.875rem;
+    --gm3-text-field-filled-label-text-size: 0.875rem;
+    --gm3-text-field-filled-label-text-font: Google Sans Text, Google Sans;
+    --gm3-text-field-filled-supporting-text-font: Google Sans Text, Google Sans;
+    --gm3-text-field-filled-leading-icon-size: 20px;
+    --gm3-text-field-filled-trailing-icon-size: 20px;
+    --gm3-text-field-filled-active-indicator-color: transparent;
+    --gm3-text-field-filled-disabled-active-indicator-color: transparent;
+    --gm3-text-field-filled-hover-active-indicator-color: transparent;
+    --gm3-text-field-filled-container-height: 52px;
+
+    /* GM3 Tooltip Component Tokens */
+    --gm3-tooltip-rich-z-index: 5055;
+    --gm3-tooltip-rich-container-color: var(--gm3-sys-color-surface);
+    --gm3-tooltip-rich-supporting-text-font: Google Sans Text, Google Sans;
+
+    /* Material Design 3 System Color Tokens - Dark Mode (Google Calendar Exact Colors) */
+    color-scheme: dark;
+    --gm3-sys-color-background: #131314;
+    --gm3-sys-color-surface: #131314;
+    --gm3-sys-color-surface-dim: #131314;
+    --gm3-sys-color-surface-container: #1e1f20;
+    --gm3-sys-color-surface-container-high: #282a2c;
+    --gm3-sys-color-surface-container-highest: #323335;
+    --gm3-sys-color-surface-container-low: #1a1a1b;
+    --gm3-sys-color-on-surface: #e3e3e3;
+    --gm3-sys-color-on-background: #e3e3e3;
+    --gm3-sys-color-primary: #a8c7fa;
+    --gm3-sys-color-on-primary: #041e49;
+    --gm3-sys-color-secondary: #7fcfff;
+    --gm3-sys-color-secondary-container: #1e4d7a;
+    --gm3-sys-color-tertiary: #6dd58c;
+    --gm3-sys-color-error: #f2b8b5;
+    --gm3-sys-color-error-container: #8c1d18;
+    --gm3-sys-color-outline: #8e918f;
+
+    /* Updated CSS Variables to match lighter design from photo */
+    --surface: #1f1f1f;
+    --panel: #0f0f0f;
+    --hover: #2a2a2a;
+    --line: #3c3c3c;
+    --text: #e3e3e3;
+    --muted: #9aa0a6;
+    --subtle: #70757a;
+    --pill: #303134;
+    --border: #5f6368;
+    --accent: #1a73e8;
+    --focus: #8ab4f8;
+
+    /* Calendar colors from styles.css */
+    --cal-kartik: #039BE5;
+    --cal-birthdays: #0B8043;
+    --cal-family: #7986CB;
+    --cal-tasks: #F6BF26;
+    --cal-holidays: #E67C73;
+
+    /* Legacy compatibility */
+    --cal-bg: #1E1F20;
+    --cell-bg: #202124;
+    --grid-line: #2D2E30;
+    --event-green: #6DD58C;
+    --radius-xl: 16px;
+    --outmonth: #8E918F;
+
+    /* Legacy calendar colors (keeping for compatibility) */
+    --cal-sys-color-warning: #ffe07c;
+    --cal-sys-color-conflict: #ffb683;
+    --cal-sys-color-success: #80da88;
+    --cal-sys-color-night: #d9bafd;
+    --cal-sys-color-now-indicator: #f55e57;
+    --cal-sys-color-grid-separator: #333537;
+    --cal-sys-color-event-work: #3AA57A;
+    --cal-sys-color-event-personal: #7fcfff;
+
+    /* AI Sidekick Application-Specific Colors */
+    --ae-genai-generation-gradient: linear-gradient(135deg, #217bfe, #078efb, #ac87eb, #217bfe);
+    --ae-sidekick-container-color: var(--gm3-sys-color-surface-dim, #131314);
+    --ae-sidekick-user-message-container-color: var(--gm3-sys-color-on-primary, #062e6f);
+
+    /* Tailwind CSS Compatibility Variables - Dark Mode Theme */
+    --background: 0 0% 7.5%;
+    --foreground: 0 0% 89%;
+    --card: 0 0% 7.5%;
+    --card-foreground: 0 0% 89%;
+    --popover: 0 0% 7.5%;
+    --popover-foreground: 0 0% 89%;
+    --primary: 217 100% 82%;
+    --primary-foreground: 217 100% 22%;
+    --secondary: 197 100% 75%;
+    --secondary-foreground: 197 100% 22%;
+    --muted: 0 0% 11%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 0 0% 11%;
+    --accent-foreground: 0 0% 89%;
+    --destructive: 5 77% 82%;
+    --destructive-foreground: 5 77% 22%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 217 100% 82%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --radius: 0.5rem;
+
+    background-color: var(--gm3-sys-color-surface);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    margin: 0;
+  }
+
+  html {
+    height: 100%;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Slide-in animation for feedback panel */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Custom scrollbar styling - Material Design 3 Dark Mode */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #474747;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5e5e5e;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #757575;
+}
+
+/* Material Design Transitions & Animations */
+@layer utilities {
+  /* Hover & Focus Transitions - Section 8 of contextual.md */
+  button, a, input, [role="button"] {
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  }
+
+  /* Dropdown/Menu Opening Animation */
+  [role="menu"], .dropdown-menu {
+    transform-origin: top center;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  /* Sidebar Toggle Animation */
+  aside, [role="navigation"] {
+    transition: transform 0.25s ease-in-out;
+  }
+}
+
+/* Accessibility Utilities */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 100;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Focus visible styles */
+*:focus-visible {
+  outline: 2px solid var(--gm3-sys-color-primary);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  * {
+    border-width: 2px !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

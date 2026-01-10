@@ -1,0 +1,44 @@
+import { pgTable, text, timestamp, serial, integer, varchar, boolean } from 'drizzle-orm/pg-core';
+
+// Events table schema - matches your current database
+export const eventsTable = pgTable('events', {
+  id: serial('id').primaryKey(),
+  title: text('title').notNull(),
+  description: text('description').notNull().default(''),
+  startDate: timestamp('start_date').notNull(),
+  endDate: timestamp('end_date'),
+  location: text('location').default(''),
+  attendees: text('attendees').default('[]'),
+  eventType: varchar('event_type', { length: 50 }).default('event'),
+  calendarId: integer('calendar_id').references(() => calendarsTable.id),
+  isAllDay: boolean('is_all_day').default(false),
+  conferenceLink: text('conference_link').default(''),
+  reminders: text('reminders').default('[]'),
+  color: text('color'), // Individual event color
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+  // Keep old 'date' field for backward compatibility
+  date: timestamp('date'),
+});
+
+// Calendars table
+export const calendarsTable = pgTable('calendars', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  color: text('color').notNull(),
+  description: text('description'),
+  isVisible: boolean('is_visible').notNull().default(true),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Event attachments table
+export const attachmentsTable = pgTable('attachments', {
+  id: serial('id').primaryKey(),
+  eventId: integer('event_id').references(() => eventsTable.id),
+  fileName: text('file_name').notNull(),
+  fileUrl: text('file_url').notNull(),
+  fileType: varchar('file_type', { length: 100 }),
+  fileSize: integer('file_size'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
