@@ -1,0 +1,14 @@
+{
+  "components/search-bar.tsx -> @/lib/offline-db": {
+    "id": "components/search-bar.tsx -> @/lib/offline-db",
+    "files": []
+  },
+  "components/search-results.tsx -> @/lib/offline-db": {
+    "id": "components/search-results.tsx -> @/lib/offline-db",
+    "files": []
+  },
+  "lib/store.ts -> @/lib/offline-db": {
+    "id": "lib/store.ts -> @/lib/offline-db",
+    "files": []
+  }
+}
